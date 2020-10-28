@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class SpinnerController {
     int load = 1;
 	@GetMapping("/sleep")
-    public String index(@RequestParam(value = "time", defaultValue = "10") String sleepTime) 
+    public String index(@RequestParam(value = "time", defaultValue = "10") String sleepTime)
+    throws InterruptedException 
         {
         Long sleepInternval = Long.parseLong(sleepTime) * 1000;
         long startTime = System.currentTimeMillis();
@@ -21,13 +22,13 @@ public class SpinnerController {
             // Every 5s, print a message
             if (currentTime % 5000 == 0) {
                 if (currentTime != lastLogTime) {
-                    lastLogTime = System.currentTimeMillis();
+                    lastLogTime = currentTime;
                     System.out.println("Elapsed time is " + elapsedTime/1000 + " seconds");
                 }
             }
             currentTime = System.currentTimeMillis();
         }
- 		return "Greetings from Spring Cloud! after " + sleepTime + " seconds.\n";
+ 		return "Greetings from Spring Cloud after " + sleepTime + " seconds.\n";
 	}
 
 }
