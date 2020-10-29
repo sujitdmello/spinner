@@ -1,7 +1,7 @@
 ## Simple Java Spring Boot app that consumes CPU
 
 This was written primarily as a way to understand how Azure Spring Cloud handles high-CPU conditions
-Once deployed, you can run the app locally and access it as follows:
+You can run the app locally and access it as follows:
 
 ```
 mvn package -DskipTests
@@ -28,6 +28,7 @@ Elapsed time is 21 seconds
 Elapsed time is 26 seconds
 Elapsed time is 31 seconds
 Elapsed time is 36 seconds
-Elapsed time is 41 seconds
 ...
 ```
+
+The same JAR file can be deployed to Azure Spring Cloud.
