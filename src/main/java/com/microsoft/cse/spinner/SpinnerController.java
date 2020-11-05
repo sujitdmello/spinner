@@ -11,24 +11,26 @@ public class SpinnerController {
     public String index(@RequestParam(value = "time", defaultValue = "10") String sleepTime)
     throws InterruptedException 
         {
-        Long sleepInternval = Long.parseLong(sleepTime) * 1000;
+        Long sleepInternval = Long.parseLong(sleepTime);
         long startTime = System.currentTimeMillis();
         long elapsedTime = 0;
-        long lastLogTime = 0;
-        long currentTime =System.currentTimeMillis();
+        long currentCount = 0;
+        long lastLogCount = 0;
+        long maxCount = Integer.MAX_VALUE * sleepInternval;
         // Loop for the given duration
-        while (currentTime - startTime < sleepInternval) {
-            elapsedTime = currentTime - startTime;
-            // Every 5s, print a message
-            if (currentTime % 5000 == 0) {
-                if (currentTime != lastLogTime) {
-                    lastLogTime = currentTime;
+        while (currentCount  < maxCount) {
+            if (currentCount % (Integer.MAX_VALUE * 5) == 0) {
+                if (lastLogCount != currentCount){
+                    lastLogCount = currentCount;
+                    elapsedTime = System.currentTimeMillis() - startTime;
                     System.out.println("Elapsed time is " + elapsedTime/1000 + " seconds");
                 }
             }
-            currentTime = System.currentTimeMillis();
-        }
- 		return "Greetings from Spring Cloud after " + sleepTime + " seconds.\n";
+            currentCount ++;
+        }        
+        long currentTime =System.currentTimeMillis();
+
+ 		return "Greetings from Spring Cloud after " + (currentTime - startTime)/1000 + " seconds.\n";
 	}
 
 }
